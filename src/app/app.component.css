@@ -1,0 +1,25 @@
+#lightSwitch {
+  transform: scale(1.8);
+}
+
+.custom-theme.bg-light {
+  background-color: darkslategray !important;
+  border-radius: 3px!important;
+  color: gainsboro!important;
+  text-decoration: underline!important;
+}
+
+.custom-theme.bg-dark {
+  background-color: #333 !important;
+  box-shadow: 10px 5px 5px rgba(246, 255, 219, 0.5)!important;
+  color: dimgray!important;
+  text-decoration: overline!important;
+}
+.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+.dark-mode a {
+  color: #aaf;
+}
