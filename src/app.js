@@ -47,10 +47,10 @@ app.post('/auth/register', (req, res) => {
 app.post('/auth/login', (req, res) => {
 
   const { email, password } = req.body;
-
+  console.log(req.body);
   if (!email || !password) {
 
-    console.log(req.body);
+
     return res.status(400).send('Username and password are required');
   }
 

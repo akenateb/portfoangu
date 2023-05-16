@@ -1,4 +1,5 @@
 import { Component,OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from './services/auth.service';
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent implements OnInit {
   titleHead: any = "Listado de Artículos";
   spanhead: any = "Artículos únicos";
 
-  constructor(private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService) {
     window.onload = () => {
       // Load your JavaScript file here
       const script = document.createElement('script');
@@ -22,8 +23,15 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     // Comprobar el estado de autenticación al inicializar el componente
     this.isLoggedIn = this.authService.isLoggedIn();
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.checkToken();
+      }
+    });
   }
-
+  checkToken(): void {
+    this.isLoggedIn = this.authService.isLoggedIn();
+  }
   logout(): void {
     this.authService.logout();
     this.isLoggedIn = false;

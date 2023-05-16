@@ -10,8 +10,9 @@ import { Router } from "@angular/router";
 export class LoginComponent {
   email = '';
   password = '';
+  errorMessage = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,private router: Router) {}
 
   login(): void {
     this.authService.login(this.email, this.password)
@@ -20,10 +21,11 @@ export class LoginComponent {
           const token = response.token;
           localStorage.setItem('access_token', token);
           console.log('User logged in successfully');
+          this.router.navigate(['/list-users']);
         },
         error => {
           console.error('Login failed', error);
-          // Aquí puedes mostrar un mensaje de error al usuario
+          this.errorMessage = 'Invalid email or password';
         }
       );
   }
