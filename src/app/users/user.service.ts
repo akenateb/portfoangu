@@ -7,12 +7,14 @@ import { User } from './user';
   providedIn: 'root'
 })
 export class UserService {
-  private baseURL = 'http://localhost:3000/users'; // Asume que tu API está corriendo en localhost:8080
+
+  private baseURL = 'https://microporfolio.net/midware/'; // Asume que tu API está corriendo en localhost:8080
 
   constructor(private http: HttpClient) { }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.baseURL}`);
+  getUsers() {
+    //return this.http.get<User[]>(`${this.baseURL}`);
+    return this.http.get(`${this.baseURL}users.php`);
   }
 
   getUserById(id: string): Observable<User> {
@@ -20,7 +22,8 @@ export class UserService {
   }
 
   createUser(user: User): Observable<Object> {
-    return this.http.post(`${this.baseURL}`, user);
+    return this.http.post(`${this.baseURL}users.php`, JSON.stringify(user));
+
   }
 
   updateUser(id: number | undefined, user: User): Observable<Object> {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -11,14 +12,14 @@ export class RegisterComponent {
   email = '';
   password = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   register(): void {
     this.authService.register(this.name,this.email, this.password)
       .subscribe(
-        () => {
-          console.log('User registered successfully');
-          // Aquí puedes redirigir al usuario a otra página o mostrar un mensaje de éxito
+        (message) => {
+          console.log('User registered successfully', message);
+          this.router.navigate(['/login']);
         },
         error => {
           console.error('Registration failed', error);

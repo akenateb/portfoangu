@@ -36,9 +36,9 @@
           <!-- Logo
           ============================================= -->
           <div id="logo">
-            <a routerLink="/login" class="standard-logo" data-dark-logo="../assets/images/logo.png"><img
+            <a routerLink="/articles" class="standard-logo" data-dark-logo="../assets/images/logo.png"><img
               ngSrc="../assets/images/logo.png" alt="Canvas Logo" height="200" width="250" priority></a>
-            <a href="index.html" class="retina-logo" data-dark-logo="../assets/images/logo.png">
+            <a routerLink="/articles" class="retina-logo" data-dark-logo="../assets/images/logo.png">
               <img ngSrc="../assets/images/logo.png" alt="Canvas Logo" height="200" width="250" priority></a>
           </div><!-- #logo end -->
 
@@ -89,26 +89,48 @@
           <nav class="primary-menu">
 
             <ul class="menu-container">
+
               <li class="menu-item">
-                <a class="menu-link" routerLink="/login">
+                <a class="menu-link" routerLink="/articles">
                   <div>Home</div>
                 </a>
+
               </li>
               <li class="menu-item" *ngIf="!isLoggedIn">
-                <a class="menu-link" routerLink="/register" routerLinkActive="active">
-                  <div>Register</div>
+                <a class="menu-link">
+                  <div>Manage User</div>
                 </a>
-              </li>
-              <li class="menu-item" *ngIf="!isLoggedIn">
-                <a class="menu-link" routerLink="/login" routerLinkActive="active">
-                  <div>Login</div>
-                </a>
+                <ul class="sub-menu-container">
+                  <li class="menu-item">
+                    <a class="menu-link" routerLink="/register" routerLinkActive="active">
+                      <div>Register</div>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a class="menu-link" routerLink="/login" routerLinkActive="active">
+                      <div>Login</div>
+                    </a>
+                  </li>
+
+                </ul>
               </li>
               <li class="menu-item" *ngIf="isLoggedIn">
+                <a class="menu-link">
+                  <div>Articles</div>
+                </a>
+                <ul class="sub-menu-container">
+                  <li class="menu-item">
+                    <a class="menu-link" routerLink="articles/create" routerLinkActive="active">
+                      <div>Create</div>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <!--<li class="menu-item" *ngIf="isLoggedIn">
                 <a class="menu-link" routerLink="/dashboard" routerLinkActive="active">
                   <div>Dashboard</div>
                 </a>
-              </li>
+              </li>-->
               <li class="menu-item" *ngIf="isLoggedIn">
                 <a class="menu-link" routerLink="/logout" routerLinkActive="active">
                   <div>Logout</div>

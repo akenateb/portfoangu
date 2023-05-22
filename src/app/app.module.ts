@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,6 +18,11 @@ import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LogoutComponent } from './auth/logout/logout.component';
+import { ArticleListComponent } from './articles/article-list/article-list.component';
+import { ArticleCreateComponent } from './articles/article-create/article-create.component';
+import { ArticleEditComponent } from './articles/article-edit/article-edit.component';
+import { ArticleDeleteComponent } from './articles/article-delete/article-delete.component';
+import { CorsInterceptor } from '../../middleware/cors.interceptor';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -33,7 +38,11 @@ export function tokenGetter() {
     RegisterComponent,
     LoginComponent,
     DashboardComponent,
-    LogoutComponent
+    LogoutComponent,
+    ArticleListComponent,
+    ArticleCreateComponent,
+    ArticleEditComponent,
+    ArticleDeleteComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +62,13 @@ export function tokenGetter() {
       },
     }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CorsInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

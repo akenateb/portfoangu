@@ -1,0 +1,23 @@
+<div class="container">
+  <h2>List of Articles</h2>
+  <table class="table dark">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Content</th>
+      <th>User ID</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let article of articles">
+      <td>{{ article.id }}</td>
+      <td>{{ article.title }}</td>
+      <td>{{ article.content }}</td>
+      <td>{{ article.user_id }}</td>
+      <td><button class="btn btn-sm btn-danger" (click)="deleteArticle(article.id)">Borrar</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

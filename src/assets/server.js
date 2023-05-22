@@ -1,20 +1,28 @@
 const express = require('express');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const app = express();
 
-app.use(cors());
+// Configuración de CORS
+app.use(cors({
+  origin: 'https://portfol2o.microporfolio.com'
+}));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-
 const connection = mysql.createConnection({
+  socketPath: '/run/mysqld/mysqld.sock',
+  user: 'portfol2odbuser',
+  password: '7t851$Ocn',
+  database: 'portfol2odb'
+});
+/*const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '123456',
   database: 'usuarios_datos'
-});
+});*/
 
 connection.connect((err) => {
   console.log('Connecting to database');
@@ -22,8 +30,8 @@ connection.connect((err) => {
   console.log('Connected to database');
 });
 
-app.listen(3000, () => {
-  console.log('Server started on port 3000');
+app.listen(3300, () => {
+  console.log('Server started on port 3300');
 });
 // GET all users
 app.get('/users', (req, res) => {
@@ -44,6 +52,7 @@ app.get('/users/:id', (req, res) => {
 
 // POST a new user
 app.post('/users', (req, res) => {
+  console.log('Registrando usuario2...');
   const {name, email, password, ord} = req.body;
   connection.query('INSERT INTO users (name, email, password) VALUES (?, ?, ?)', [name, email, password], (err, results) => {
     if (err) throw err;

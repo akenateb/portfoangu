@@ -20,6 +20,7 @@ export class LoginComponent {
         response => {
           const token = response.token;
           localStorage.setItem('access_token', token);
+
           console.log('User logged in successfully');
           this.router.navigate(['/list-users']);
         },

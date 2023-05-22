@@ -14,8 +14,12 @@ export class AddUserComponent {
   constructor(private userService: UserService, private router: Router) { }
 
   addUser() {
-    this.userService.createUser(this.user).subscribe(user => {
-      this.router.navigate(['/']);
+    this.userService.createUser(this.user).subscribe((datos:any) => {
+      if (datos['resultado']=='OK') {
+        alert(datos['mensaje']);
+        this.router.navigate(['/login']);
+      }
+
     });
   }
 }
